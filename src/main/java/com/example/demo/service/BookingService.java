@@ -16,12 +16,11 @@ public class BookingService {
     public String bookingMovie(BookingDetails bookingDetails){
         System.out.println(bookingDetails.getSeatNumbers());
         bookingDetailsRepo.save(bookingDetails);
-
         return "Boook done";
     }
 
-    public List<Integer> getSeats(String movie) {
-        String seats = bookingDetailsRepo.getSeats(movie);
-        return  null;
+    public String getSeats(String movie) {
+        return  bookingDetailsRepo.getSeats(movie);
+
     }
 }

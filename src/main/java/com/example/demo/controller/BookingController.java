@@ -4,12 +4,14 @@ import com.example.demo.dto.BookingRequestDTO;
 import com.example.demo.modal.BookingDetails;
 import com.example.demo.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("api/movies/booking")
 @CrossOrigin("*")
 public class BookingController {
@@ -19,15 +21,20 @@ public class BookingController {
 
     @PostMapping
     public String bookMovie(@RequestBody BookingDetails bookingDetails){
-        String response = bookingService.bookingMovie(bookingDetails);
-        return  "Booking success";
+       bookingService.bookingMovie(bookingDetails);
+        return  "Booking  success";
     }
 
-    @GetMapping("/seats")
-    public List<Integer> getSeats(@RequestBody String movie){
+    @GetMapping("/seats/{movie}")
+    public ResponseEntity<String> getSeats(@PathVariable String movie) {
+       String seats = bookingService.getSeats(movie);
 
-        List<Integer> seats = bookingService.getSeats(movie);
-        return null;
+        if (seats == null || seats.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("");
+        }
+
+        return ResponseEntity.ok(seats);
     }
+
 
 }

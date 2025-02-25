@@ -17,5 +17,5 @@ public class BookingRequestDTO {
     private String username;
     private String userEmail;
     private String mobileNumber;
-    private String seatNumber;
+    private String seatNumbers;
 }

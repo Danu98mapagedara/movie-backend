@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 
 public class ContactDetails {
-   @Id
+     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
